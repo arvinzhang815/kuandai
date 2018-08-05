@@ -1,0 +1,23 @@
+#默认的位置是src/main/webapp 这里可以更换，比如/page/ 那么目录就变成了src/main/webapp/pages
+spring:
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+  application:
+    name: kuandai
+  datasource:
+      name: kuandai
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://39.108.128.195/:3306/arvinzhang
+      username: root
+      password: arvinzhang
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: demo.dto
+
+server:
+  port: 80
+

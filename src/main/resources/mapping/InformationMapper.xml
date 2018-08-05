@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="demo.dao.KuandaiMapper" >
+    <resultMap id="BaseResultMap" type="demo.dto.Information" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="telphone" property="telphone" jdbcType="VARCHAR" />
+        <result column="kuandaiNo" property="kuandaiNo" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="KDAddr" property="KDAddr" jdbcType="VARCHAR" />
+        <result column="begainDate" property="begainDate" jdbcType="VARCHAR" />
+        <result column="endDate" property="endDate" jdbcType="VARCHAR" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+    id, name,telphone,kuandaiNo,address,KDAddr,begainDate,endDate,remark
+  </sql>
+    <sql id="where_condition">
+        <trim prefix=" " suffix=" " suffixOverrides="and">
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR} and
+            </if>
+            <if test="telphone != null" >
+                telphone = #{telphone,jdbcType=VARCHAR} and
+            </if>
+            <if test="kuandaiNo != null" >
+                kuandaiNo = #{kuandaiNo,jdbcType=VARCHAR} and
+            </if>
+            <if test="address != null" >
+                address = #{address,jdbcType=VARCHAR} and
+            </if>
+            <if test="KDAddr != null" >
+                KDAddr = #{KDAddr,jdbcType=VARCHAR} and
+            </if>
+            <if test="begainDate != null" >
+                begainDate = #{begainDate,jdbcType=VARCHAR} and
+            </if>
+            <if test="endDate != null" >
+                endDate = #{endDate,jdbcType=VARCHAR} and
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR} and
+            </if>
+        </trim>
+    </sql>
+
+
+    <insert id="insert" parameterType="demo.dto.Information" >
+        insert into information
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="telphone != null" >
+                telphone,
+            </if>
+            <if test="kuandaiNo != null" >
+                kuandaiNo,
+            </if>
+            <if test="address != null" >
+                address,
+            </if>
+            <if test="KDAddr != null" >
+                KDAddr,
+            </if>
+            <if test="begainDate != null" >
+                begainDate,
+            </if>
+            <if test="endDate != null" >
+                endDate,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="telphone != null" >
+                #{telphone,jdbcType=VARCHAR},
+            </if>
+            <if test="kuandaiNo != null" >
+                #{kuandaiNo,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null" >
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="KDAddr != null" >
+                #{KDAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="begainDate != null" >
+                #{begainDate,jdbcType=VARCHAR},
+            </if>
+            <if test="endDate != null" >
+                #{endDate,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="demo.dto.Information" >
+        update information
+        <set >
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="telphone != null" >
+                #{telphone,jdbcType=VARCHAR},
+            </if>
+            <if test="kuandaiNo != null" >
+                #{kuandaiNo,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null" >
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="KDAddr != null" >
+                #{KDAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="begainDate != null" >
+                #{begainDate,jdbcType=VARCHAR},
+            </if>
+            <if test="endDate != null" >
+                #{endDate,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where
+        <include refid="where_condition" />
+    </update>
+
+    <delete id="delete" parameterType="demo.dto.Information" >
+            from information
+    where <include refid="where_condition" />
+    </delete>
+    <select id="queryInfor" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from information
+        where <include refid="where_condition" />
+    </select>
+
+    <select id="getInforById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from information
+        where id = #{id}
+    </select>
+
+    <select id="countInfor" resultType="long">
+        select
+        COUNT(id)
+        from information
+        where <include refid="where_condition" />
+    </select>
+
+
+</mapper>
